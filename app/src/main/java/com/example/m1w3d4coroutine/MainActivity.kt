@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -40,15 +41,20 @@ class MainActivity : ComponentActivity() {
         // in the secondary kitchen(IO thread)
 
 //        val ChefsStart = System.nanoTime()
-
-        GlobalScope.launch() {
+        val handler = CoroutineExceptionHandler{_, throwable ->
+            print("Exception handling: ${throwable.localizedMessage}")
+        }
+        GlobalScope.launch(handler) {
             println("secondary kitchen Chef_1 " + dish_1())
+            throw IndexOutOfBoundsException("Chef_1 mast up")
         }
-        GlobalScope.launch() {
+        GlobalScope.launch(handler) {
             println("secondary kitchen Chef_2 " + dish_2())
+            throw IndexOutOfBoundsException("Chef_2 mast up")
         }
-        GlobalScope.launch() {
+        GlobalScope.launch(handler) {
             println("secondary kitchen Chef_3 " + dish_3())
+            throw IndexOutOfBoundsException("Chef_3 mast up")
         }
 
 //        val ChefsEnd = System.nanoTime()
