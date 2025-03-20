@@ -23,8 +23,6 @@ class MainActivity : ComponentActivity() {
 
         //Here we have only one Chef(coroutine)
         // cooking 3 dishes(functions) one after another
-        // in the main kitchen(main thread)
-
         val mainChefStarts = System.nanoTime()
 
         println("Main Chef " + dish_1())
@@ -38,7 +36,6 @@ class MainActivity : ComponentActivity() {
 
         //Then the main Chef hired 3 Chefs(coroutines)
         // they are cooking 3 dishes(functions) at the same time
-        // in the secondary kitchen(IO thread)
 
 //        val ChefsStart = System.nanoTime()
         val handler = CoroutineExceptionHandler{_, throwable ->
@@ -60,7 +57,7 @@ class MainActivity : ComponentActivity() {
 //        val ChefsEnd = System.nanoTime()
 //
 //        val ChefsDuration = (ChefsEnd - ChefsStart) / 1_000_000_000
-//        println("The nwe hired Chefs tok $ChefsDuration")
+//        println("The new hired Chefs tok $ChefsDuration")
 
 
     }
